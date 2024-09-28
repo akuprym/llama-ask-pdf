@@ -42,3 +42,16 @@ def display_pdf(file):
     base64_pdf = base64.b64decode(file.read()).decode('utf-8')
     pdf_difplay = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="400" type="application/pdf"></iframe>'
     st.markdown(pdf_display, unsafe_allow_html=True)
+
+db_path = tempfile.mkdtemp()
+if 'app' not in st.session_state:
+    st.session_state.app = embedchain_bot(db_path)
+if 'messages' not in st.session_state:
+    st.session_state.messages = []
+
+with st.sidebar:
+    st.header("PDF Upload")
+    pdf_file = st.file_uploader("Upload a PDF file", type="pdf")
+    if pdf_file:
+        st.subheader("PDF Preview")
+        display_pdf(pdf_file)
