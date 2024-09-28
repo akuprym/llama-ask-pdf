@@ -8,7 +8,7 @@ from streamlit_chat import message
 st.title("Chat with PDF using Llama 3.2")
 st.caption("This app allows you to chat with a PDF using Llama 3.2 running locally with Ollama!")
 
-def embedchain_bot(dn_path):
+def embedchain_bot(db_path):
     return App.from_config(
     config = {
         'llm': {
@@ -37,3 +37,8 @@ def embedchain_bot(dn_path):
         }
     }
     )
+
+def display_pdf(file):
+    base64_pdf = base64.b64decode(file.read()).decode('utf-8')
+    pdf_difplay = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="400" type="application/pdf"></iframe>'
+    st.markdown(pdf_display, unsafe_allow_html=True)
