@@ -6,7 +6,7 @@ import base64
 from streamlit_chat import message
 
 st.title("Chat with PDF using Llama 3.2")
-st.caption("This app allows you to chat with a PDF using Llama 3.2 running locally with Ollama!")
+st.caption("This app lets you chat with a PDF using Llama 3.2, running locally on Ollama!")
 
 def embedchain_bot(db_path):
     return App.from_config(
@@ -31,20 +31,21 @@ if 'messages' not in st.session_state:
     st.session_state.messages = []
 
 # Sidebar interface
-st.sidebar.header("PDF Upload")
-pdf_file = st.sidebar.file_uploader("Upload a PDF file", type="pdf")
+with st.sidebar:
+    st.header("PDF Upload")
+    pdf_file = st.file_uploader("Upload a PDF file", type="pdf")
 
-if pdf_file:
-    st.sidebar.subheader("PDF Preview")
-    display_pdf(pdf_file)
+    if pdf_file:
+        st.sidebar.subheader("PDF Preview")
+        display_pdf(pdf_file)
 
-    if st.sidebar.button("Add to Knowledge Base"):
-        with st.spinner("Adding PDF to knowledge base..."):
-            with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as f:
-                f.write(pdf_file.getvalue())
-                st.session_state.app.add(f.name, data_type="pdf_file")
-            os.remove(f.name)
-        st.sidebar.success(f"Added {pdf_file.name} to knowledge base!")
+        if st.sidebar.button("Add to Knowledge Base"):
+            with st.spinner("Adding PDF to knowledge base..."):
+                with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as f:
+                    f.write(pdf_file.getvalue())
+                    st.session_state.app.add(f.name, data_type="pdf_file")
+                os.remove(f.name)
+            st.sidebar.success(f"Added {pdf_file.name} to knowledge base!")
 
 # Chat interface
 for i, msg in enumerate(st.session_state.messages):
