@@ -5,8 +5,8 @@ from embedchain import App
 import base64
 from streamlit_chat import message
 
-st.title("Chat with PDF using Llama 3.2")
-st.caption("This app lets you chat with a PDF using Llama 3.2, running locally with Ollama!")
+st.title("Ask PDF using Llama 3.2")
+st.caption("This app lets you get insights from a PDF using Llama 3.2, running locally with Ollama!")
 
 def embedchain_bot(db_path):
     return App.from_config(
