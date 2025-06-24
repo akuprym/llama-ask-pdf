@@ -1,0 +1,6 @@
+streamlit==1.33.0
+embedchain==0.1.84
+streamlit-chat==0.1.0
+chromadb==0.4.24
+ollama==0.1.14
+pypdf==4.1.0
