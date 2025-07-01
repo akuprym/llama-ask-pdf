@@ -25,7 +25,7 @@ A Python application that lets you get insights from a PDF document using Llama 
 # Usage
 1. Run the application:
    ```
-    streamlit run app.py
+    streamlit run llama-ask-pdf.py
    ```
 2. Upload a PDF file through the sidebar.
 3. Click "Add to Knowledge Base" to process the PDF:
